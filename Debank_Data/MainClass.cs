@@ -155,6 +155,15 @@ namespace Debank_Data
         public static void Exportxcel(ref int startRow, List<WalletTokensByChains> wallets, string sheetName)
         {
             string excelPath = "FormattedExcel.xlsx";
+            //create if not exist
+            if (!System.IO.File.Exists(excelPath))
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    workbook.Worksheets.Add(sheetName);
+                    workbook.SaveAs(excelPath);
+                }
+            }
 
             using (var workbook = new XLWorkbook(excelPath))
             {
